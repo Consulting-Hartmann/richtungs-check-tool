@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>KI-Business-Cockpit – Beispiel | Hartmann Consulting</title>
+<title>Zeit-Check für Ihren Betrieb | Hartmann Consulting</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap">
@@ -17,7 +17,7 @@
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--grey); color: var(--text); font-family: 'Lato', system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 18px; line-height: 1.6; padding: 28px 20px 40px; }
-  .card { max-width: 980px; margin: 0 auto; background: var(--white); border-radius: 14px; padding: 34px 40px 40px; box-shadow: 0 2px 10px rgba(80,50,90,.08); }
+  .card { position: relative; max-width: 980px; margin: 0 auto; background: var(--white); border-radius: 14px; padding: 34px 40px 40px; box-shadow: 0 2px 10px rgba(80,50,90,.08); }
   h1, h2 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; line-height: 1.25; }
   [hidden] { display: none !important; }
 
@@ -25,7 +25,20 @@
   header img { height: 56px; width: auto; display: block; }
   .badge { background: var(--lavender-bg); color: var(--fuchsia); font-weight: 700; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; padding: 7px 14px; border-radius: 20px; border: 1px solid var(--lavender); }
 
-  .title { font-size: 34px; color: var(--fuchsia); margin: 22px 0 6px; }
+  .stoerer { position: absolute; right: 30px; top: 132px; width: 190px; height: 190px; border-radius: 50%; background: var(--fuchsia); color: #ffffff; transform: rotate(8deg); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 14px; line-height: 1.15; box-shadow: 0 4px 14px rgba(165,50,120,.35); border: 3px solid #ffffff; outline: 2px solid var(--fuchsia); }
+  .stoerer .s1 { font-weight: 700; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; }
+  .stoerer .s2 { font-size: 14px; margin: 3px 0; }
+  .stoerer .s3 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; font-size: 18px; line-height: 1.2; }
+  .stoerer .s2 { margin: 4px 0 4px; }
+  .stoerer .s4 { font-size: 13px; margin-top: 3px; }
+  .kicker, .title, .sub { max-width: 690px; }
+  .sub strong { color: var(--text); }
+  .sum { margin-top: 16px; font-size: 20px; line-height: 1.5; font-weight: 700; color: var(--text); }
+  .sum em { font-style: normal; color: var(--fuchsia); }
+  .calc-cta { margin: 18px 0 4px; padding: 16px 18px; background: var(--grey); border-radius: 10px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px; }
+  .calc-cta p { flex: 1 1 260px; }
+  .kicker { font-weight: 700; font-size: 14px; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); margin: 22px 0 4px; }
+  .title { font-size: 34px; line-height: 1.25; color: var(--fuchsia); margin: 0 0 10px; }
   .sub { color: var(--muted); margin-bottom: 22px; }
 
   .progress { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 26px; }
@@ -92,6 +105,22 @@
   .btn2 { font: inherit; font-weight: 700; font-size: 16px; color: var(--fuchsia); background: var(--white); border: 2px solid var(--fuchsia); border-radius: 8px; padding: 11px 20px; cursor: pointer; }
   .btn2:hover { background: var(--fuchsia-bg); }
 
+  .calc2 { margin: 26px 0 8px; border: 2px solid var(--fuchsia); border-radius: 12px; padding: 24px 26px; }
+  .calc2 h2 { font-size: 26px; margin-bottom: 6px; }
+  .calc2 .lead { margin-bottom: 16px; }
+  .fields { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 20px; }
+  .fields label { display: flex; flex-direction: column; justify-content: space-between; gap: 8px; font-weight: 700; font-size: 15px; color: var(--text); }
+  .fields input { font: inherit; font-size: 20px; font-weight: 700; color: var(--text); padding: 11px 14px; border: 2px solid var(--line); border-radius: 8px; width: 100%; background: var(--white); }
+  .fields input:focus { outline: none; border-color: var(--fuchsia); }
+  .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .tile { background: var(--lavender-bg); border-radius: 10px; padding: 16px 18px; text-align: center; }
+  .tile.hl { background: var(--fuchsia); color: #ffffff; }
+  .tile .tn { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; font-size: 34px; line-height: 1.15; color: var(--fuchsia); }
+  .tile.hl .tn { color: #ffffff; }
+  .tile .tl { font-weight: 700; font-size: 15px; margin-top: 2px; }
+  .tile .tl2 { font-size: 14px; margin-top: 4px; color: #ffffff; }
+  .tile.hl .tl { color: #ffffff; }
+  .fine2 { font-size: 14px; color: var(--muted); margin-top: 14px; }
   .saved { background: var(--fuchsia); color: #ffffff; border-radius: 12px; padding: 24px 28px; margin: 6px 0 4px; }
   .saved .big { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; font-size: 32px; line-height: 1.2; color: #ffffff; margin-bottom: 8px; }
   .saved .line { font-size: 18px; color: #ffffff; margin-bottom: 12px; }
@@ -125,6 +154,14 @@
     .choices { grid-template-columns: 1fr; }
     .bgrid { grid-template-columns: 1fr; }
     .saved { padding: 18px; }
+    .fields, .tiles { grid-template-columns: 1fr; }
+    .stoerer { position: static; width: auto; height: auto; border-radius: 30px; transform: none; flex-direction: row; flex-wrap: wrap; gap: 4px 8px; justify-content: center; padding: 10px 16px; margin: 18px 0 4px; box-shadow: none; outline: none; border: 0; }
+    .stoerer .s2, .stoerer .s3 { font-size: 15px; margin: 0; }
+    .stoerer .s2::after { content: ""; }
+    .stoerer .s4 { font-size: 15px; }
+    .kicker, .title, .sub { max-width: none; }
+    .calc2 { padding: 18px; }
+    .tile .tn { font-size: 30px; }
     .saved .big { font-size: 25px; }
     .title { font-size: 28px; }
     h2.ask { font-size: 24px; }
@@ -143,17 +180,18 @@
     <span class="badge">Beispiel</span>
   </header>
 
-  <h1 class="title">KI-Business-Cockpit</h1>
-  <p class="tagline">Testen Sie, wie viel Zeit und Geld Sie mit KI sparen.</p>
-  <p class="sub">Schon kleine Quick Wins zählen. Wählen Sie Ihre Branche, sehen Sie in vier Schritten ein Beispiel aus Ihrem Alltag und rechnen Sie nach, wie viel Arbeitszeit Sie sich sparen könnten. KI im Alltag: leicht umgesetzt, viel Zeit gespart.</p>
+  <div class="stoerer"><span class="s1">Jetzt testen</span><span class="s2">Mit KI sparen Sie</span><span class="s3" id="st-h">ca. 19 Stunden</span><span class="s3" id="st-e">ca. 1.150 €</span><span class="s4">pro Monat (Beispiel)</span></div>
+  <p class="kicker">Zeit-Check für Ihren Betrieb</p>
+  <h1 class="title">Wie viele Stunden und Aufträge verschenken Sie bei Angeboten, Kundenanfragen und im Wettbewerb?</h1>
+  <p class="sub"><strong>Schlauer Einsatz von KI, auch in Ihrem Unternehmen:</strong> Schon im Beispiel sparen Sie damit ca. <span id="sub-h">19 Stunden</span> und ca. <span id="sub-m">1.150 €</span> im Monat, im Jahr ca. <span id="sub-y">13.600 €</span>. Und Sie sind dem Wettbewerb einen Schritt voraus. Finden Sie in wenigen Minuten heraus, was das für Ihren Betrieb bedeutet.</p>
 
   <div class="progress" id="progress">
     <div>1  Branche</div><div>2  Aufgabe</div><div>3  Beispiel</div><div>4  Ergebnis</div>
   </div>
 
   <section class="step" id="step1">
-    <h2 class="ask">Aus welcher Branche kommen Sie?</h2>
-    <p class="lead">Dann zeige ich Ihnen Beispiele, die zu Ihrem Alltag passen.</p>
+    <h2 class="ask">Jetzt testen: Aus welcher Branche kommen Sie?</h2>
+    <p class="lead">Ein Klick genügt, dann sehen Sie ein Beispiel aus Ihrem Alltag.</p>
     <div class="choices" id="branches"></div>
   </section>
 
@@ -198,6 +236,28 @@
         <div class="fine">Schätzwerte aus dem Arbeitsalltag. Ihr Ergebnis kann abweichen.</div>
       </div>
 
+      <section class="calc2" aria-labelledby="h-calc">
+        <h2 id="h-calc">Schlauer Einsatz von KI, auch in Ihrem Unternehmen</h2>
+        <p class="lead">Rechnen Sie jetzt aus, was Sie damit sparen. Tragen Sie ein, wie oft das bei Ihnen vorkommt, die Rechnung passt sich sofort an.</p>
+        <div class="fields">
+          <label><span>Angebote pro Woche</span><input type="number" id="c-offers" min="0" max="200" step="1" value="3" inputmode="numeric"></label>
+          <label><span>Schwierige oder zeitaufwendige E-Mails und Kundenanfragen pro Woche</span><input type="number" id="c-mails" min="0" max="500" step="1" value="5" inputmode="numeric"></label>
+          <label><span>Wettbewerbs-Checks pro Monat (Mitbewerber prüfen und darauf reagieren)</span><input type="number" id="c-comp" min="0" max="50" step="1" value="1" inputmode="numeric"></label>
+          <label><span>Ihr Stundensatz in Euro</span><input type="number" id="c-rate" min="0" max="1000" step="5" value="60" inputmode="numeric"></label>
+        </div>
+        <div class="tiles">
+          <div class="tile"><div class="tn" id="o-week">0</div><div class="tl">Stunden pro Woche durch KI gespart</div></div>
+          <div class="tile"><div class="tn" id="o-month">0</div><div class="tl">Stunden pro Monat durch KI gespart</div></div>
+          <div class="tile hl"><div class="tn" id="o-euro">0</div><div class="tl">Zeitwert pro Monat durch KI gespart</div><div class="tl2" id="o-euro-year"></div></div>
+        </div>
+        <p class="sum" id="o-sum"></p>
+        <div class="calc-cta">
+          <p><strong>Wie viel davon ist bei Ihnen wirklich drin?</strong> Wir rechnen es gemeinsam mit Ihren echten Zahlen durch.</p>
+          <a class="btn" href="https://calendly.com/info-56117/30min" target="_blank" rel="noopener" style="color:#ffffff;font-weight:700;">Meine Zeitersparnis im Erstgespräch klären</a>
+        </div>
+        <p class="fine2">Annahmen: pro Angebot ca. 55 Minuten, pro E-Mail oder Anfrage ca. 22 Minuten, pro Wettbewerbs-Check ca. 80 Minuten gespart, 46 Arbeitswochen im Jahr, der Monatswert ist ein Zwölftel des Jahreswerts. Das ist eine Hochrechnung und kein Versprechen. Der Zeitwert zeigt, was diese Zeit bei Ihrem Stundensatz wert ist, wenn Sie sie für Kunden und Aufträge nutzen.</p>
+      </section>
+
       <div class="again">
         <button class="btn2" type="button" id="other-case">Anderes Beispiel ansehen</button>
         <button class="btn2" type="button" id="other-task">Andere Aufgabe wählen</button>
@@ -208,7 +268,7 @@
         <h2>Was Ihnen das im Alltag bringt</h2>
         <div class="bgrid">
           <div class="b"><strong>Sie sparen Zeit.</strong><span>Ein Angebot, das sonst abends eine Stunde kostet, steht als Entwurf in Minuten. Sie prüfen, ergänzen und senden.</span></div>
-          <div class="b"><strong>Sie sind schneller als andere.</strong><span>Kunden vergleichen. Wer zuerst ein klares Angebot schickt, hat einen Vorsprung.</span></div>
+          <div class="b"><strong>Sie sind dem Wettbewerb voraus.</strong><span>Kunden vergleichen. Sie sehen, wo Mitbewerber angreifbar sind, und handeln schneller als andere.</span></div>
           <div class="b"><strong>Sie wirken professionell.</strong><span>Vollständige Angebote und freundliche, klare Antworten, jedes Mal im gleichen guten Stil.</span></div>
           <div class="b"><strong>Es bleibt nichts liegen.</strong><span>Angebote, Antworten und Nachfassen sind erledigt, bevor sich der Schreibtisch füllt.</span></div>
         </div>
@@ -216,7 +276,7 @@
 
       <section class="cta">
         <h2>Das war ein Beispiel. Jetzt geht es um Ihren Betrieb.</h2>
-        <p class="t">Angebote, E-Mails und Nachfassen kosten im Alltag viel Zeit. Wer sie schneller und professioneller erledigt, hat im Wettbewerb einen Vorsprung. Im kostenlosen Erstgespräch klären wir gemeinsam:</p>
+        <p class="t">Ich bin Sann Hartmann und bringe Marketing und Vertrieb in inhabergeführten Betrieben auf Kurs. KI ist dabei ein Werkzeug und kein Selbstzweck. Entscheidend ist, dass Angebote, Antworten und Nachfassen bei Ihnen schnell und zuverlässig laufen. Im kostenlosen Erstgespräch klären wir gemeinsam:</p>
         <ul>
           <li>Wo geht bei Ihnen am meisten Zeit verloren?</li>
           <li>Was lässt sich schnell und einfach verbessern?</li>
@@ -647,6 +707,23 @@
     $('saved-tally').textContent = 'Bisher angesehen: ' + count + (count === 1 ? ' Beispiel' : ' Beispiele') + ' · zusammen ca. ' + fmt(total) + ' gespart, das sind bei 60 Euro Stundensatz rund ' + Math.round(total) + ' Euro Zeitwert.';
   }
 
+
+  var WEEKS = 46;
+  function num(id, max) { var v = parseFloat(String($(id).value).replace(',', '.')); if (isNaN(v) || v < 0) { v = 0; } return Math.min(v, max); }
+  function de(n, digits) { return n.toLocaleString('de-DE', { maximumFractionDigits: digits }); }
+  function recalc() {
+    var offerMin = TASKS[0].manual - TASKS[0].cockpit, compMin = TASKS[1].manual - TASKS[1].cockpit, mailMin = TASKS[2].manual - TASKS[2].cockpit;
+    var yearH = (num('c-offers', 200) * offerMin + num('c-mails', 500) * mailMin) / 60 * WEEKS + num('c-comp', 50) * 12 * compMin / 60;
+    var weekH = yearH / WEEKS, monthH = yearH / 12, rate = num('c-rate', 1000);
+    var euroM = Math.round(monthH * rate / 50) * 50, euroY = Math.round(yearH * rate / 50) * 50;
+    $('o-week').textContent = 'ca. ' + de(Math.round(weekH * 10) / 10, 1);
+    $('o-month').textContent = 'ca. ' + de(Math.round(monthH), 0);
+    $('o-euro').textContent = 'ca. ' + de(euroM, 0) + ' €';
+    $('o-euro-year').textContent = 'das sind ca. ' + de(euroY, 0) + ' € im Jahr';
+    $('o-sum').textContent = 'Mit schlauem KI-Einsatz sparen Sie im Jahr ca. ' + de(Math.round(yearH), 0) + ' Stunden und ca. ' + de(euroY, 0) + ' €. Das ist Zeit für Kunden, Aufträge und alles, was Ihren Betrieb wirklich voranbringt.';
+  }
+  ['c-offers', 'c-mails', 'c-comp', 'c-rate'].forEach(function (id) { $(id).addEventListener('input', recalc); });
+
   var timer = null;
   function buildStep4() {
     var b = BRANCHES[sel.branch], t = TASKS[sel.task], c = b.cases[t.id][sel.kase];
@@ -677,6 +754,18 @@
   $('other-task').addEventListener('click', function () { buildStep2(); show(2); });
   $('other-branch').addEventListener('click', function () { show(1); });
 
+  
+  (function () {
+    var offerMin = TASKS[0].manual - TASKS[0].cockpit, compMin = TASKS[1].manual - TASKS[1].cockpit, mailMin = TASKS[2].manual - TASKS[2].cockpit;
+    var yearH = (3 * offerMin + 5 * mailMin) / 60 * WEEKS + 1 * 12 * compMin / 60;
+    var monthH = yearH / 12, euroM = Math.round(monthH * 60 / 50) * 50, euroY = Math.round(yearH * 60 / 50) * 50;
+    $('st-h').textContent = 'ca. ' + de(Math.round(monthH), 0) + ' Stunden';
+    $('st-e').textContent = 'ca. ' + de(euroM, 0) + ' €';
+    $('sub-h').textContent = de(Math.round(monthH), 0) + ' Stunden';
+    $('sub-m').textContent = de(euroM, 0) + ' €';
+    $('sub-y').textContent = de(euroY, 0) + ' €';
+  })();
+  recalc();
   buildStep1(); show(1);
 })();
 
