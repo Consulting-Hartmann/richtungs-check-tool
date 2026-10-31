@@ -92,6 +92,19 @@
   .btn2 { font: inherit; font-weight: 700; font-size: 16px; color: var(--fuchsia); background: var(--white); border: 2px solid var(--fuchsia); border-radius: 8px; padding: 11px 20px; cursor: pointer; }
   .btn2:hover { background: var(--fuchsia-bg); }
 
+  .saved { background: var(--fuchsia); color: #ffffff; border-radius: 12px; padding: 24px 28px; margin: 6px 0 4px; }
+  .saved .big { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; font-size: 32px; line-height: 1.2; color: #ffffff; margin-bottom: 8px; }
+  .saved .line { font-size: 18px; color: #ffffff; margin-bottom: 12px; }
+  .saved .tally { font-weight: 700; font-size: 18px; color: #ffffff; padding-top: 12px; border-top: 1px solid rgba(255,255,255,.5); }
+  .saved .fine { font-size: 14px; color: #ffffff; opacity: .9; margin-top: 8px; }
+  .tagline { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; font-size: 26px; line-height: 1.3; color: var(--text); margin: 0 0 6px; }
+  .benefits { margin-top: 30px; }
+  .benefits h2 { font-size: 26px; margin-bottom: 14px; }
+  .bgrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .bgrid .b { background: var(--lavender-bg); border-left: 5px solid var(--fuchsia); border-radius: 10px; padding: 16px 18px; display: flex; flex-direction: column; gap: 4px; }
+  .bgrid .b strong { color: var(--fuchsia); font-size: 19px; }
+  .bgrid .b span { font-size: 16px; line-height: 1.55; }
+  .calc { margin-top: 14px; font-size: 15px; color: var(--muted); }
   .cta { margin-top: 34px; background: var(--grey); border-radius: 12px; padding: 30px; }
   .cta h2 { font-size: 28px; margin-bottom: 10px; }
   .cta p.t { max-width: 760px; margin-bottom: 12px; }
@@ -110,6 +123,9 @@
     body { font-size: 17px; padding: 14px 12px 30px; }
     .card { padding: 22px 18px 28px; }
     .choices { grid-template-columns: 1fr; }
+    .bgrid { grid-template-columns: 1fr; }
+    .saved { padding: 18px; }
+    .saved .big { font-size: 25px; }
     .title { font-size: 28px; }
     h2.ask { font-size: 24px; }
     .cta { padding: 22px 18px; }
@@ -128,7 +144,8 @@
   </header>
 
   <h1 class="title">KI-Business-Cockpit</h1>
-  <p class="sub">Sehen Sie in vier kurzen Schritten, wie ein Cockpit Angebote, Antworten und Analysen für Sie schreibt. Ohne Anmeldung, ohne Kosten.</p>
+  <p class="tagline">Testen Sie, wie viel Zeit und Geld Sie mit KI sparen.</p>
+  <p class="sub">Schon kleine Quick Wins zählen. Wählen Sie Ihre Branche, sehen Sie in vier Schritten ein Beispiel aus Ihrem Alltag und rechnen Sie nach, wie viel Arbeitszeit Sie sich sparen könnten. KI im Alltag: leicht umgesetzt, viel Zeit gespart.</p>
 
   <div class="progress" id="progress">
     <div>1  Branche</div><div>2  Aufgabe</div><div>3  Beispiel</div><div>4  Ergebnis</div>
@@ -174,15 +191,32 @@
         <p class="note">In der Live-Version entsteht dieser Text in Sekunden aus Ihren eigenen Stichpunkten. Die Beispiele sind frei erfunden. Angaben in eckigen Klammern, zum Beispiel [Datum], trägt der Betrieb selbst ein. KI-Entwürfe werden vor dem Versand immer geprüft.</p>
       </div>
 
+      <div class="saved">
+        <div class="big" id="saved-big"></div>
+        <div class="line" id="saved-line"></div>
+        <div class="tally" id="saved-tally"></div>
+        <div class="fine">Schätzwerte aus dem Arbeitsalltag. Ihr Ergebnis kann abweichen.</div>
+      </div>
+
       <div class="again">
         <button class="btn2" type="button" id="other-case">Anderes Beispiel ansehen</button>
         <button class="btn2" type="button" id="other-task">Andere Aufgabe wählen</button>
         <button class="btn2" type="button" id="other-branch">Andere Branche wählen</button>
       </div>
 
+      <section class="benefits">
+        <h2>Was Ihnen das im Alltag bringt</h2>
+        <div class="bgrid">
+          <div class="b"><strong>Sie sparen Zeit.</strong><span>Ein Angebot, das sonst abends eine Stunde kostet, steht als Entwurf in Minuten. Sie prüfen, ergänzen und senden.</span></div>
+          <div class="b"><strong>Sie sind schneller als andere.</strong><span>Kunden vergleichen. Wer zuerst ein klares Angebot schickt, hat einen Vorsprung.</span></div>
+          <div class="b"><strong>Sie wirken professionell.</strong><span>Vollständige Angebote und freundliche, klare Antworten, jedes Mal im gleichen guten Stil.</span></div>
+          <div class="b"><strong>Es bleibt nichts liegen.</strong><span>Angebote, Antworten und Nachfassen sind erledigt, bevor sich der Schreibtisch füllt.</span></div>
+        </div>
+      </section>
+
       <section class="cta">
         <h2>Das war ein Beispiel. Jetzt geht es um Ihren Betrieb.</h2>
-        <p class="t">Angebote, E-Mails und Nachfassen kosten im Alltag viel Zeit. Im kostenlosen Erstgespräch klären wir gemeinsam:</p>
+        <p class="t">Angebote, E-Mails und Nachfassen kosten im Alltag viel Zeit. Wer sie schneller und professioneller erledigt, hat im Wettbewerb einen Vorsprung. Im kostenlosen Erstgespräch klären wir gemeinsam:</p>
         <ul>
           <li>Wo geht bei Ihnen am meisten Zeit verloren?</li>
           <li>Was lässt sich schnell und einfach verbessern?</li>
@@ -207,11 +241,11 @@
 (function () {
   var TASKS = [
     { id: 'angebot', title: 'Ein Angebot schreiben', sub: 'Aus Ihren Gesprächsnotizen wird in Sekunden ein fertiges Angebot.',
-      pick: 'Für welchen Auftrag soll das Angebot sein?', inLabel: 'Notizen aus dem Gespräch mit dem Kunden', outLabel: 'Fertiger Angebotsentwurf' },
-    { id: 'radar', title: 'Die Konkurrenz einordnen', sub: 'Sie sehen, wo Sie sich vom Mitbewerber abheben und wie Sie in Ihrer Region gefunden werden.',
-      pick: 'Gegen wen treten Sie an?', inLabel: 'Angaben zum Mitbewerber und zur eigenen Leistung', outLabel: 'Konkurrenz-Analyse für Ihre Region' },
+      manual: 60, cockpit: 5, pick: 'Für welchen Auftrag soll das Angebot sein?', inLabel: 'Notizen aus dem Gespräch mit dem Kunden', outLabel: 'Fertiger Angebotsentwurf' },
+    { id: 'radar', title: 'Wettbewerbsvorteil schaffen', sub: 'Sie sehen in Sekunden, wo der Mitbewerber angreifbar ist und wie Sie schnell darauf reagieren.',
+      manual: 90, cockpit: 10, pick: 'Von wem wollen Sie sich absetzen?', inLabel: 'Angaben zum Mitbewerber und zur eigenen Leistung', outLabel: 'Ihr Wettbewerbsvorteil für die Region' },
     { id: 'email', title: 'Eine schwierige E-Mail beantworten', sub: 'Aus einer verärgerten oder sehr langen Mail wird eine ruhige, klare Antwort.',
-      pick: 'Welche E-Mail ist eingegangen?', inLabel: 'Die eingegangene Nachricht', outLabel: 'Fertiger Antwortentwurf' }
+      manual: 25, cockpit: 3, pick: 'Welche E-Mail ist eingegangen?', inLabel: 'Die eingegangene Nachricht', outLabel: 'Fertiger Antwortentwurf' }
   ];
 
   var MWST = 'Die Preise verstehen sich [inklusive oder zuzüglich] Mehrwertsteuer.';
@@ -263,9 +297,9 @@
             input: 'Mitbewerber: überregionaler Küchen-Onlineanbieter, wirbt mit „Küche in vier Wochen, Festpreis online“, Standardmaße, Montage durch Subunternehmer. Wir: Schreinerei in Prien mit 12 Mitarbeitern, Maßmöbel und Küchen, persönliche Beratung, Montage mit eigenen Leuten. Region: Chiemgau, Prien, Rosenheim.',
             out: [
               { h: '1. Wo der Online-Anbieter angreifbar ist', ul: ['Standardmaße: Altbauten und Dachschrägen im Chiemgau verlangen oft Maßarbeit.', 'Montage durch Subunternehmer: Wer macht den Service, wenn nach der Montage etwas nicht passt?', 'Festpreis online: Das verspricht Tempo, aber keine Beratung vor Ort.'] },
-              { h: '2. Ihr Vorsprung', ul: ['Maßanfertigung statt Standardmaße.', 'Eigene Monteure: Beratung, Fertigung und Einbau aus einer Hand.', 'Nähe: Der Kunde kann vorbeikommen und Muster sehen.'] },
+              { h: '2. Ihr Wettbewerbsvorteil', ul: ['Maßanfertigung statt Standardmaße.', 'Eigene Monteure: Beratung, Fertigung und Einbau aus einer Hand.', 'Nähe: Der Kunde kann vorbeikommen und Muster sehen.'] },
               { h: '3. Diese Suchbegriffe gehören auf Ihre Website', ul: ['Schreinerei Prien', 'Einbauschrank nach Maß Chiemgau', 'Küche nach Maß Rosenheim', 'Maßmöbel Traunstein'] },
-              { h: '4. Ihr erster Schritt diese Woche', p: ['Legen Sie eine Leistungsseite „Einbauschrank nach Maß“ an, mit drei Referenzfotos aus der Region.', 'Ihre Botschaft: „Maßarbeit vom Schreiner, den Sie persönlich kennen.“'] }
+              { h: '4. So reagieren Sie schnell: Ihr Schritt diese Woche', p: ['Legen Sie eine Leistungsseite „Einbauschrank nach Maß“ an, mit drei Referenzfotos aus der Region.', 'Ihre Botschaft: „Maßarbeit vom Schreiner, den Sie persönlich kennen.“'] }
             ]
           },
           {
@@ -274,9 +308,9 @@
             input: 'Mitbewerber: Online-Anbieter für Wärmepumpen, wirbt mit Festpreis und Förderservice, Einbau durch wechselnde Partnerfirmen. Wir: Haustechnik-Betrieb in Traunstein mit 35 Mitarbeitern, Heizung und Bäder, eigener Kundendienst, Besichtigung vor Ort. Region: Traunstein, Chiemgau.',
             out: [
               { h: '1. Wo der Online-Anbieter angreifbar ist', ul: ['Wechselnde Partnerfirmen: Wer ist Ansprechpartner, wenn nach dem Einbau etwas nicht läuft?', 'Festpreis online: Der Preis steht, bevor jemand das Haus gesehen hat.', 'Standardangebot ohne Besichtigung: Jedes Haus ist anders.'] },
-              { h: '2. Ihr Vorsprung', ul: ['Eigener Kundendienst: Ihre Leute kommen, wenn etwas nicht läuft.', 'Besichtigung vor Ort: Das Angebot passt zum Haus.', '35 Mitarbeiter in der Region: kurze Wege.'] },
+              { h: '2. Ihr Wettbewerbsvorteil', ul: ['Eigener Kundendienst: Ihre Leute kommen, wenn etwas nicht läuft.', 'Besichtigung vor Ort: Das Angebot passt zum Haus.', '35 Mitarbeiter in der Region: kurze Wege.'] },
               { h: '3. Diese Suchbegriffe gehören auf Ihre Website', ul: ['Heizungsbau Traunstein', 'Wärmepumpe Chiemgau', 'Badsanierung Traunstein', 'Heizung Kundendienst Chiemgau'] },
-              { h: '4. Ihr erster Schritt diese Woche', p: ['Legen Sie eine Seite „Heizung mit Kundendienst aus Traunstein“ an, mit einem Foto Ihres Kundendienst-Teams.', 'Ihre Botschaft: „Heizung vom Fachbetrieb, der auch nach dem Einbau für Sie da ist.“'] }
+              { h: '4. So reagieren Sie schnell: Ihr Schritt diese Woche', p: ['Legen Sie eine Seite „Heizung mit Kundendienst aus Traunstein“ an, mit einem Foto Ihres Kundendienst-Teams.', 'Ihre Botschaft: „Heizung vom Fachbetrieb, der auch nach dem Einbau für Sie da ist.“'] }
             ]
           },
           {
@@ -285,9 +319,9 @@
             input: 'Mitbewerber: überregionaler Anbieter für Geländer und Vordächer, günstiger Preis, Fertigung im Ausland, Lieferzeit etwa zehn Wochen, keine Beratung vor Ort. Wir: Metallbau in Rosenheim mit 20 Mitarbeitern, Geländer, Treppen und Vordächer, Fertigung im eigenen Haus, Lieferzeit etwa vier Wochen. Region: Rosenheim, Chiemgau.',
             out: [
               { h: '1. Wo der überregionale Anbieter angreifbar ist', ul: ['Lange Lieferzeit: etwa zehn Wochen statt vier.', 'Fertigung im Ausland: Änderungen und Nachbesserungen dauern.', 'Keine Beratung vor Ort: Maße und Anschlüsse bleiben Sache des Kunden.'] },
-              { h: '2. Ihr Vorsprung', ul: ['Lieferzeit von etwa vier Wochen.', 'Fertigung im eigenen Haus: kurze Wege bei Änderungen.', 'Aufmaß und Beratung vor Ort in der Region.'] },
+              { h: '2. Ihr Wettbewerbsvorteil', ul: ['Lieferzeit von etwa vier Wochen.', 'Fertigung im eigenen Haus: kurze Wege bei Änderungen.', 'Aufmaß und Beratung vor Ort in der Region.'] },
               { h: '3. Diese Suchbegriffe gehören auf Ihre Website', ul: ['Metallbau Rosenheim', 'Treppengeländer nach Maß Rosenheim', 'Vordach Metall Chiemgau', 'Geländer Metallbau Traunstein'] },
-              { h: '4. Ihr erster Schritt diese Woche', p: ['Nennen Sie auf Ihrer Website die Lieferzeit: „Ihr Geländer in etwa vier Wochen.“', 'Ihre Botschaft: „Metallbau aus Rosenheim. Im eigenen Haus gefertigt, in vier Wochen geliefert.“'] }
+              { h: '4. So reagieren Sie schnell: Ihr Schritt diese Woche', p: ['Nennen Sie auf Ihrer Website die Lieferzeit: „Ihr Geländer in etwa vier Wochen.“', 'Ihre Botschaft: „Metallbau aus Rosenheim. Im eigenen Haus gefertigt, in vier Wochen geliefert.“'] }
             ]
           }
         ],
@@ -370,9 +404,9 @@
             input: 'Mitbewerber: überregionale Servicefirma, wirbt mit „Alles aus einer Hand, 24/7-Hotline“, wechselnde Ansprechpartner, Standardverträge. Wir: inhabergeführter Gebäudeservice im Raum Rosenheim, feste Teams pro Objekt, direkte Ansprechpartnerin. Region: Rosenheim, Chiemgau.',
             out: [
               { h: '1. Wo die überregionale Servicefirma angreifbar ist', ul: ['Wechselnde Ansprechpartner: Hausverwaltungen müssen sich jedes Mal neu erklären.', 'Standardverträge: Sie passen selten auf die Eigenheiten einzelner Objekte.', '24/7-Hotline statt fester Person: Erreichbarkeit ersetzt keine Verantwortung.'] },
-              { h: '2. Ihr Vorsprung', ul: ['Feste Teams pro Objekt: Die Leute kennen Haus und Bewohner.', 'Eine Ansprechpartnerin, die Entscheidungen trifft.', 'Region: kurze Wege und schnelle Hilfe im Raum Rosenheim.'] },
+              { h: '2. Ihr Wettbewerbsvorteil', ul: ['Feste Teams pro Objekt: Die Leute kennen Haus und Bewohner.', 'Eine Ansprechpartnerin, die Entscheidungen trifft.', 'Region: kurze Wege und schnelle Hilfe im Raum Rosenheim.'] },
               { h: '3. Diese Suchbegriffe gehören auf Ihre Website', ul: ['Hausmeisterservice Rosenheim', 'Gebäudereinigung Chiemgau', 'Winterdienst Hausverwaltung Rosenheim', 'Objektbetreuung Traunstein'] },
-              { h: '4. Ihr erster Schritt diese Woche', p: ['Legen Sie eine Seite „Objektbetreuung für Hausverwaltungen im Raum Rosenheim“ an und stellen Sie dort Ihre festen Teams mit Foto vor.', 'Ihre Botschaft: „Feste Teams, feste Ansprechpartnerin. Für Ihre Objekte im Chiemgau.“'] }
+              { h: '4. So reagieren Sie schnell: Ihr Schritt diese Woche', p: ['Legen Sie eine Seite „Objektbetreuung für Hausverwaltungen im Raum Rosenheim“ an und stellen Sie dort Ihre festen Teams mit Foto vor.', 'Ihre Botschaft: „Feste Teams, feste Ansprechpartnerin. Für Ihre Objekte im Chiemgau.“'] }
             ]
           },
           {
@@ -381,9 +415,9 @@
             input: 'Mitbewerber: großer IT-Dienstleister aus München, Anfragen laufen über ein Ticketsystem ohne feste Ansprechpartner, Reaktionszeit zwei Werktage, Vertrag über 36 Monate. Wir: IT-Betreuung aus Traunstein mit fünf Mitarbeitern, feste Ansprechperson, Reaktion innerhalb von vier Stunden, Verträge monatlich kündbar. Region: Traunstein, Chiemgau.',
             out: [
               { h: '1. Wo der große Dienstleister angreifbar ist', ul: ['Ticketsystem ohne feste Ansprechpartner: Kunden erklären ihr Problem jedes Mal neu.', 'Reaktionszeit von zwei Werktagen: Bei einem Ausfall steht der Betrieb.', 'Vertrag über 36 Monate: Wer unzufrieden ist, kommt nicht heraus.'] },
-              { h: '2. Ihr Vorsprung', ul: ['Reaktion innerhalb von vier Stunden.', 'Feste Ansprechperson, die den Betrieb kennt.', 'Monatlich kündbar: Sie überzeugen durch Leistung, nicht durch Laufzeit.'] },
+              { h: '2. Ihr Wettbewerbsvorteil', ul: ['Reaktion innerhalb von vier Stunden.', 'Feste Ansprechperson, die den Betrieb kennt.', 'Monatlich kündbar: Sie überzeugen durch Leistung, nicht durch Laufzeit.'] },
               { h: '3. Diese Suchbegriffe gehören auf Ihre Website', ul: ['IT-Betreuung Traunstein', 'IT-Service Mittelstand Chiemgau', 'EDV-Betreuung Rosenheim', 'IT-Support Büro Chiemgau'] },
-              { h: '4. Ihr erster Schritt diese Woche', p: ['Zeigen Sie auf Ihrer Startseite Ihre Reaktionszeit und Ihre feste Ansprechperson mit Foto.', 'Ihre Botschaft: „Antwort in vier Stunden. Von einem Ansprechpartner, den Sie kennen.“'] }
+              { h: '4. So reagieren Sie schnell: Ihr Schritt diese Woche', p: ['Zeigen Sie auf Ihrer Startseite Ihre Reaktionszeit und Ihre feste Ansprechperson mit Foto.', 'Ihre Botschaft: „Antwort in vier Stunden. Von einem Ansprechpartner, den Sie kennen.“'] }
             ]
           },
           {
@@ -392,9 +426,9 @@
             input: 'Mitbewerber: Online-Portal für Buchhaltung, wirbt mit „ab 29 € im Monat“, Support nur per Chat, keine persönliche Beratung. Wir: Buchhaltungsbüro in Prien mit sechs Mitarbeitern, persönliche Beratung, Schwerpunkt Handwerk und Gastronomie. Region: Prien, Chiemgau.',
             out: [
               { h: '1. Wo das Online-Portal angreifbar ist', ul: ['Support nur per Chat: Bei Fragen zur eigenen Branche bleibt der Kunde allein.', '„Ab 29 €“: Das Wort „ab“ sagt noch nichts über den tatsächlichen Preis.', 'Keine persönliche Beratung: Der Betrieb wird nicht verstanden.'] },
-              { h: '2. Ihr Vorsprung', ul: ['Persönliche Beratung durch ein Team vor Ort in Prien.', 'Schwerpunkt Handwerk und Gastronomie: Sie kennen die Zahlen dieser Branchen.', 'Kurze Wege: Ein Anruf genügt.'] },
+              { h: '2. Ihr Wettbewerbsvorteil', ul: ['Persönliche Beratung durch ein Team vor Ort in Prien.', 'Schwerpunkt Handwerk und Gastronomie: Sie kennen die Zahlen dieser Branchen.', 'Kurze Wege: Ein Anruf genügt.'] },
               { h: '3. Diese Suchbegriffe gehören auf Ihre Website', ul: ['Buchhaltung Prien', 'Buchhaltung Handwerksbetrieb Chiemgau', 'Buchhaltung Gastronomie Chiemsee', 'Buchhaltungsbüro Rosenheim'] },
-              { h: '4. Ihr erster Schritt diese Woche', p: ['Schreiben Sie auf Ihre Startseite, für welche Branchen Sie arbeiten, mit zwei kurzen Beispielen.', 'Ihre Botschaft: „Buchhaltung für Handwerk und Gastro. Mit einem Menschen, der Ihre Branche kennt.“'] }
+              { h: '4. So reagieren Sie schnell: Ihr Schritt diese Woche', p: ['Schreiben Sie auf Ihre Startseite, für welche Branchen Sie arbeiten, mit zwei kurzen Beispielen.', 'Ihre Botschaft: „Buchhaltung für Handwerk und Gastro. Mit einem Menschen, der Ihre Branche kennt.“'] }
             ]
           }
         ],
@@ -477,9 +511,9 @@
             input: 'Mitbewerber: großes Tagungshotel einer überregionalen Kette, wirbt mit Online-Buchung und Gruppenpaketen, Standardabläufe, wenig persönlicher Kontakt. Wir: familiengeführter Gasthof am See, 14 Zimmer, regionale Küche, persönliche Betreuung bei Feiern. Region: Chiemgau, Prien.',
             out: [
               { h: '1. Wo das Tagungshotel angreifbar ist', ul: ['Standardabläufe: Feiern wirken austauschbar.', 'Wenig persönlicher Kontakt: Wer plant, spricht mit einem System statt mit Menschen.', 'Überregionale Kette: Die Region ist Kulisse und nicht Teil des Konzepts.'] },
-              { h: '2. Ihr Vorsprung', ul: ['Persönliche Betreuung durch das Gastgeberteam bei jeder Feier.', 'Regionale Küche als Teil des Erlebnisses.', 'Die Lage am See ist ein Motiv, das sich gut zeigen lässt.'] },
+              { h: '2. Ihr Wettbewerbsvorteil', ul: ['Persönliche Betreuung durch das Gastgeberteam bei jeder Feier.', 'Regionale Küche als Teil des Erlebnisses.', 'Die Lage am See ist ein Motiv, das sich gut zeigen lässt.'] },
               { h: '3. Diese Suchbegriffe gehören auf Ihre Website', ul: ['Feier am Chiemsee Gasthof', 'Hochzeitslocation Prien', 'Betriebsfeier Chiemgau', 'Gruppenunterkunft Chiemgau'] },
-              { h: '4. Ihr erster Schritt diese Woche', p: ['Legen Sie eine Seite „Feiern am See“ an, mit zwei festen Paketen und dem Versprechen einer Antwort innerhalb von 24 Stunden.', 'Ihre Botschaft: „Ihre Feier am Chiemsee. Persönlich geplant von uns.“'] }
+              { h: '4. So reagieren Sie schnell: Ihr Schritt diese Woche', p: ['Legen Sie eine Seite „Feiern am See“ an, mit zwei festen Paketen und dem Versprechen einer Antwort innerhalb von 24 Stunden.', 'Ihre Botschaft: „Ihre Feier am Chiemsee. Persönlich geplant von uns.“'] }
             ]
           },
           {
@@ -488,9 +522,9 @@
             input: 'Mitbewerber: Franchise-Café-Kette im Ort, wirbt mit „Kaffee-Flatrate“, Standardkarte, Einheitsdesign. Wir: familiengeführtes Café in Prien mit eigener Backstube, Kuchen aus eigener Herstellung, Terrasse mit Blick auf den See. Region: Prien, Chiemsee.',
             out: [
               { h: '1. Wo die Kette angreifbar ist', ul: ['Standardkarte: Die Gäste finden überall dasselbe.', 'Einheitsdesign: Das Café könnte überall stehen, nicht nur am Chiemsee.', 'Die „Kaffee-Flatrate“ lockt mit dem Preis, aber nicht mit Genuss.'] },
-              { h: '2. Ihr Vorsprung', ul: ['Kuchen aus eigener Backstube.', 'Terrasse mit Blick auf den See.', 'Familiengeführt: Die Gäste treffen die Menschen dahinter.'] },
+              { h: '2. Ihr Wettbewerbsvorteil', ul: ['Kuchen aus eigener Backstube.', 'Terrasse mit Blick auf den See.', 'Familiengeführt: Die Gäste treffen die Menschen dahinter.'] },
               { h: '3. Diese Suchbegriffe gehören auf Ihre Website', ul: ['Café Prien am Chiemsee', 'Kuchen aus eigener Backstube Prien', 'Terrasse am See Prien', 'Frühstück Chiemsee'] },
-              { h: '4. Ihr erster Schritt diese Woche', p: ['Zeigen Sie auf Ihrer Website und in Ihrem Google-Profil drei Fotos: Backstube, Kuchenvitrine und Terrasse mit See.', 'Ihre Botschaft: „Kuchen aus eigener Backstube. Mit Blick auf den See.“'] }
+              { h: '4. So reagieren Sie schnell: Ihr Schritt diese Woche', p: ['Zeigen Sie auf Ihrer Website und in Ihrem Google-Profil drei Fotos: Backstube, Kuchenvitrine und Terrasse mit See.', 'Ihre Botschaft: „Kuchen aus eigener Backstube. Mit Blick auf den See.“'] }
             ]
           },
           {
@@ -499,9 +533,9 @@
             input: 'Mitbewerber: Online-Plattform für Freizeitaktivitäten, listet Anbieter gegen Provision, Standardbeschreibungen, keine persönliche Auskunft. Wir: Erlebnisanbieter am Chiemsee mit Segelkursen und Bootstouren, eigene Skipper, kleine Gruppen. Region: Chiemsee, Prien.',
             out: [
               { h: '1. Wo die Plattform angreifbar ist', ul: ['Provision: Ein Teil jeder Buchung geht an die Plattform.', 'Standardbeschreibungen: Ihr Angebot wirkt wie alle anderen.', 'Keine persönliche Auskunft: Fragen bleiben unbeantwortet.'] },
-              { h: '2. Ihr Vorsprung', ul: ['Eigene Skipper: Die Gäste lernen die Menschen kennen.', 'Kleine Gruppen: mehr Zeit für jeden Einzelnen.', 'Direkter Kontakt: Sie antworten persönlich.'] },
+              { h: '2. Ihr Wettbewerbsvorteil', ul: ['Eigene Skipper: Die Gäste lernen die Menschen kennen.', 'Kleine Gruppen: mehr Zeit für jeden Einzelnen.', 'Direkter Kontakt: Sie antworten persönlich.'] },
               { h: '3. Diese Suchbegriffe gehören auf Ihre Website', ul: ['Segelkurs Prien', 'Bootstour Chiemsee', 'Erlebnis Chiemsee für Gruppen', 'Firmenevent Chiemsee'] },
-              { h: '4. Ihr erster Schritt diese Woche', p: ['Richten Sie auf Ihrer Website eine einfache Anfrage- und Buchungsseite ein, mit Fotos Ihrer Skipper.', 'Ihre Botschaft: „Segeln am Chiemsee mit Skippern, die Sie persönlich kennenlernen.“'] }
+              { h: '4. So reagieren Sie schnell: Ihr Schritt diese Woche', p: ['Richten Sie auf Ihrer Website eine einfache Anfrage- und Buchungsseite ein, mit Fotos Ihrer Skipper.', 'Ihre Botschaft: „Segeln am Chiemsee mit Skippern, die Sie persönlich kennenlernen.“'] }
             ]
           }
         ],
@@ -595,6 +629,24 @@
     });
   }
 
+
+  var seen = {};
+  function fmt(min) {
+    if (min < 60) { return min + ' Minuten'; }
+    var h = Math.floor(min / 60), m = min % 60;
+    return h + ' Std.' + (m ? ' ' + m + ' Min.' : '');
+  }
+  function updateSaved() {
+    var t = TASKS[sel.task];
+    var key = sel.branch + '-' + sel.task + '-' + sel.kase;
+    seen[key] = t.manual - t.cockpit;
+    var count = 0, total = 0;
+    Object.keys(seen).forEach(function (k) { count++; total += seen[k]; });
+    $('saved-big').textContent = 'Ca. ' + fmt(t.manual - t.cockpit) + ' Arbeit gespart';
+    $('saved-line').textContent = 'Ohne Cockpit rechnen wir mit ca. ' + fmt(t.manual) + ', mit Cockpit mit ca. ' + fmt(t.cockpit) + ' bis zum fertigen Entwurf.';
+    $('saved-tally').textContent = 'Bisher angesehen: ' + count + (count === 1 ? ' Beispiel' : ' Beispiele') + ' · zusammen ca. ' + fmt(total) + ' gespart, das sind bei 60 Euro Stundensatz rund ' + Math.round(total) + ' Euro Zeitwert.';
+  }
+
   var timer = null;
   function buildStep4() {
     var b = BRANCHES[sel.branch], t = TASKS[sel.task], c = b.cases[t.id][sel.kase];
@@ -614,7 +666,7 @@
   $('make').addEventListener('click', function () {
     $('make').hidden = true; $('loading').hidden = false;
     timer = setTimeout(function () {
-      $('loading').hidden = true; $('result').hidden = false;
+      $('loading').hidden = true; updateSaved(); $('result').hidden = false;
       var res = $('result'); if (res.scrollIntoView) { res.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
     }, 1400);
   });
