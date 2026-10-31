@@ -180,10 +180,10 @@
     <span class="badge">Beispiel</span>
   </header>
 
-  <div class="stoerer"><span class="s1">Jetzt testen</span><span class="s2">Mit KI sparen Sie</span><span class="s3" id="st-h">ca. 19 Stunden</span><span class="s3" id="st-e">ca. 1.150 €</span><span class="s4">pro Monat (Beispiel)</span></div>
+  <div class="stoerer"><span class="s1">Jetzt testen</span><span class="s2">Mit KI sparen Sie</span><span class="s3" id="st-h">ca. 227 Stunden</span><span class="s3" id="st-e">ca. 13.600 €</span><span class="s4">im Jahr (Beispiel)</span></div>
   <p class="kicker">Zeit-Check für Ihren Betrieb</p>
   <h1 class="title">Wie viele Stunden und Aufträge verschenken Sie bei Angeboten, Kundenanfragen und im Wettbewerb?</h1>
-  <p class="sub"><strong>Schlauer Einsatz von KI, auch in Ihrem Unternehmen:</strong> Schon im Beispiel sparen Sie damit ca. <span id="sub-h">19 Stunden</span> und ca. <span id="sub-m">1.150 €</span> im Monat, im Jahr ca. <span id="sub-y">13.600 €</span>. Und Sie sind dem Wettbewerb einen Schritt voraus. Finden Sie in wenigen Minuten heraus, was das für Ihren Betrieb bedeutet.</p>
+  <p class="sub"><strong>Schlauer Einsatz von KI, auch in Ihrem Unternehmen:</strong> Schon im Beispiel sparen Sie damit ca. <span id="sub-h">227 Stunden</span> und ca. <span id="sub-y">13.600 €</span> im Jahr, das sind ca. <span id="sub-m">1.150 €</span> im Monat. Und Sie sind dem Wettbewerb einen Schritt voraus. Finden Sie in wenigen Minuten heraus, was das für Ihren Betrieb bedeutet.</p>
 
   <div class="progress" id="progress">
     <div>1  Branche</div><div>2  Aufgabe</div><div>3  Beispiel</div><div>4  Ergebnis</div>
@@ -759,11 +759,11 @@
     var offerMin = TASKS[0].manual - TASKS[0].cockpit, compMin = TASKS[1].manual - TASKS[1].cockpit, mailMin = TASKS[2].manual - TASKS[2].cockpit;
     var yearH = (3 * offerMin + 5 * mailMin) / 60 * WEEKS + 1 * 12 * compMin / 60;
     var monthH = yearH / 12, euroM = Math.round(monthH * 60 / 50) * 50, euroY = Math.round(yearH * 60 / 50) * 50;
-    $('st-h').textContent = 'ca. ' + de(Math.round(monthH), 0) + ' Stunden';
-    $('st-e').textContent = 'ca. ' + de(euroM, 0) + ' €';
-    $('sub-h').textContent = de(Math.round(monthH), 0) + ' Stunden';
-    $('sub-m').textContent = de(euroM, 0) + ' €';
+    $('st-h').textContent = 'ca. ' + de(Math.round(yearH), 0) + ' Stunden';
+    $('st-e').textContent = 'ca. ' + de(euroY, 0) + ' €';
+    $('sub-h').textContent = de(Math.round(yearH), 0) + ' Stunden';
     $('sub-y').textContent = de(euroY, 0) + ' €';
+    $('sub-m').textContent = de(euroM, 0) + ' €';
   })();
   recalc();
   buildStep1(); show(1);
