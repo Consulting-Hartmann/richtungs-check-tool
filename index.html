@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<title>Hartmann Consulting – Prioritäten-Tool</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+body{background:#F5F5F5;font-family:'Lato',sans-serif;color:#505050;padding:1.5rem 1rem;}
+.hc{max-width:680px;margin:0 auto;}
+
+.hc-brand-top{font-family:'Lato',sans-serif;font-weight:700;font-size:18px;letter-spacing:0.12em;color:#A53278;}
+.hc-brand-bot{font-family:'Lato',sans-serif;font-weight:300;font-size:13px;letter-spacing:0.14em;color:#A8A8CC;margin-top:2px;}
+.hc-divider{height:1px;background:linear-gradient(to right,#A53278,#A8A8CC);opacity:0.25;margin:0.75rem 0;}
+.hc-tagline{font-size:10px;letter-spacing:0.09em;color:#A53278;font-weight:700;text-transform:uppercase;margin-bottom:1.75rem;}
+
+.badge{display:inline-block;background:#A53278;color:#fff;font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;padding:5px 14px;border-radius:2px;margin-bottom:0.9rem;}
+.badge-dark{background:#505050;}
+
+.headline{font-family:'Playfair Display',serif;font-size:24px;color:#505050;margin-bottom:0.5rem;line-height:1.3;}
+.subtext{font-size:14px;color:#505050;line-height:1.75;margin-bottom:1.25rem;}
+
+/* CHIPS — 2 Spalten Desktop, 1 Spalte Mobile */
+.chips-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:0.9rem;}
+.chip{padding:13px 14px;background:#fff;border:1.5px solid #E0E0E0;border-radius:6px;font-size:14px;color:#505050;cursor:pointer;display:flex;align-items:center;gap:9px;transition:border-color 0.15s,background 0.15s;user-select:none;min-height:52px;}
+.chip:active{transform:scale(0.97);}
+.chip:hover{border-color:#A53278;background:#fdf5f9;}
+.chip.on{background:#A53278;color:#fff;border-color:#A53278;}
+.chip-icon{font-size:18px;opacity:0.65;flex-shrink:0;}
+.chip.on .chip-icon{opacity:1;}
+
+.custom-row{display:flex;gap:8px;margin-bottom:1.25rem;}
+.custom-row input{flex:1;font-size:15px;padding:12px 14px;border:1.5px solid #E0E0E0;border-radius:6px;background:#fff;color:#505050;-webkit-appearance:none;}
+.custom-row input:focus{outline:none;border-color:#A53278;}
+.custom-row button{padding:12px 16px;font-size:14px;font-weight:700;background:#A53278;color:#fff;border:none;border-radius:6px;cursor:pointer;white-space:nowrap;min-width:44px;}
+
+.sel-area{display:flex;flex-wrap:wrap;gap:7px;min-height:38px;margin-bottom:1.25rem;align-items:center;}
+.sel-tag{display:flex;align-items:center;gap:6px;padding:7px 11px 7px 13px;background:#fff;border:1.5px solid #A53278;border-radius:20px;font-size:13px;color:#A53278;font-weight:700;}
+.sel-tag button{background:none;border:none;cursor:pointer;color:#A53278;font-size:17px;line-height:1;padding:0;min-width:24px;min-height:24px;}
+.empty-hint{font-size:13px;color:#bbb;font-style:italic;}
+
+.btn{width:100%;padding:16px;background:#A53278;color:#fff;border:none;border-radius:6px;font-size:16px;font-weight:700;cursor:pointer;letter-spacing:0.03em;transition:opacity 0.15s;min-height:54px;}
+.btn:disabled{opacity:0.3;cursor:not-allowed;}
+.btn:not(:disabled):active{opacity:0.85;transform:scale(0.99);}
+
+.step{display:none;}
+.step.on{display:block;}
+
+/* STEP 2 — MOBILE: Themen als Liste, tippen zum Zuordnen */
+.assign-hint{background:#f5f0f8;border:1.5px solid #c8a8d8;border-radius:6px;padding:13px 15px;margin-bottom:1rem;font-size:14px;color:#6a3080;font-weight:700;line-height:1.5;}
+
+/* TOPIC CARDS zum Antippen */
+.topic-cards{margin-bottom:1.25rem;}
+.topic-card{
+  background:#fff;border-radius:6px;
+  border:1.5px solid #E0E0E0;
+  padding:13px 15px;margin-bottom:8px;
+  cursor:pointer;
+  transition:border-color 0.15s,background 0.15s;
+}
+.topic-card:active{transform:scale(0.99);}
+.topic-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.topic-card-name{font-size:15px;font-weight:700;color:#505050;}
+.topic-card-assigned{font-size:12px;color:#A53278;font-weight:700;}
+.topic-card-assigned.none{color:#bbb;font-weight:400;}
+
+/* Quadrant-Buttons innerhalb jeder Topic-Card */
+.q-btns{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+.q-btn{
+  padding:9px 8px;border-radius:5px;
+  border:1.5px solid transparent;
+  font-size:12px;font-weight:700;
+  cursor:pointer;text-align:center;
+  line-height:1.3;
+  transition:transform 0.1s;
+  min-height:48px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:2px;
+}
+.q-btn:active{transform:scale(0.96);}
+.q-btn-sub{font-size:10px;font-weight:400;opacity:0.8;}
+
+.q-btn-tun{background:#f7e5f1;border-color:#e0b8d8;color:#8c1a5e;}
+.q-btn-tun.sel{background:#8c1a5e;color:#fff;border-color:#8c1a5e;}
+.q-btn-plan{background:#eceaf5;border-color:#c8c0e8;color:#3d3580;}
+.q-btn-plan.sel{background:#3d3580;color:#fff;border-color:#3d3580;}
+.q-btn-ueber{background:#f3eaf5;border-color:#d8b8e8;color:#6a2878;}
+.q-btn-ueber.sel{background:#6a2878;color:#fff;border-color:#6a2878;}
+.q-btn-loss{background:#eeecf0;border-color:#c8c0c8;color:#504858;}
+.q-btn-loss.sel{background:#504858;color:#fff;border-color:#504858;}
+
+/* Desktop: auch Drag & Drop erhalten */
+.matrix-desktop{display:none;}
+.axis-top-row{display:grid;grid-template-columns:32px 1fr 1fr;gap:6px;margin-bottom:3px;}
+.axis-top-left{grid-column:2;font-size:11px;color:#888;text-transform:uppercase;letter-spacing:0.07em;font-weight:700;display:flex;align-items:center;}
+.axis-top-right{grid-column:3;font-size:11px;color:#888;text-transform:uppercase;letter-spacing:0.07em;font-weight:700;display:flex;align-items:center;justify-content:flex-end;}
+.axis-dring-row{display:flex;justify-content:space-between;font-size:10px;color:#aaa;letter-spacing:0.06em;text-transform:uppercase;padding:0 0 5px 38px;font-weight:700;}
+.matrix-outer{display:grid;grid-template-columns:32px 1fr;gap:6px;margin-bottom:0.75rem;}
+.axis-vert-wrap{display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:4px 0;}
+.axis-vert-label{writing-mode:vertical-rl;transform:rotate(180deg);font-size:10px;color:#888;text-transform:uppercase;letter-spacing:0.07em;font-weight:700;}
+.matrix-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:6px;}
+.q{border-radius:5px;padding:14px 12px;min-height:130px;border:2px dashed transparent;transition:border-color 0.15s,transform 0.1s;}
+.q.over{border-color:rgba(165,50,120,0.45)!important;transform:scale(1.02);}
+.q-lbl{font-size:14px;font-weight:700;margin-bottom:3px;}
+.q-sub{font-size:11px;margin-bottom:8px;line-height:1.4;}
+.q-tun{background:#f7e5f1;} .q-tun .q-lbl{color:#8c1a5e;} .q-tun .q-sub{color:#b05090;}
+.q-plan{background:#eceaf5;} .q-plan .q-lbl{color:#3d3580;} .q-plan .q-sub{color:#7068aa;}
+.q-ueber{background:#f3eaf5;} .q-ueber .q-lbl{color:#6a2878;} .q-ueber .q-sub{color:#9060a8;}
+.q-loss{background:#eeecf0;} .q-loss .q-lbl{color:#504858;} .q-loss .q-sub{color:#807088;}
+.placed{display:inline-block;padding:4px 9px;background:rgba(255,255,255,0.9);border-radius:3px;font-size:11px;font-weight:700;cursor:grab;border:1px solid rgba(165,50,120,0.2);color:#505050;margin:2px;}
+.inbox{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px 12px;background:#fff;border:1.5px solid #E0E0E0;border-radius:4px;min-height:46px;margin-bottom:1rem;}
+.inbox-lbl{font-size:11px;color:#bbb;margin-right:4px;font-style:italic;}
+.drag-chip{padding:7px 14px;background:#A53278;color:#fff;border-radius:3px;font-size:13px;font-weight:700;cursor:grab;user-select:none;}
+
+.matrix-note{font-size:13px;color:#aaa;margin-bottom:1rem;line-height:1.5;font-style:italic;}
+
+/* RESULT */
+.result-hero{background:#A53278;border-radius:8px;padding:1.75rem 1.5rem;margin-bottom:1.25rem;position:relative;overflow:hidden;}
+.result-hero::before{content:'';position:absolute;top:-40px;right:-40px;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,0.07);}
+.result-label{display:inline-block;background:rgba(255,255,255,0.2);color:#fff;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:0.85rem;}
+.result-hero h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff!important;margin-bottom:0.6rem;line-height:1.25;position:relative;z-index:1;}
+.result-hero p{font-size:14px;color:rgba(255,255,255,0.92)!important;line-height:1.75;position:relative;z-index:1;}
+
+.prio-list{margin-bottom:1.25rem;}
+.prio-list-title{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#A53278;margin-bottom:0.75rem;}
+.prio-item{display:flex;align-items:flex-start;gap:12px;background:#fff;border-radius:6px;border-left:4px solid #A53278;padding:13px 14px;margin-bottom:8px;}
+.prio-item.prio-plan{border-left-color:#7068aa;}
+.prio-item.prio-ueber{border-left-color:#9060a8;}
+.prio-item.prio-loss{border-left-color:#c0b8c8;}
+.prio-num{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:#A53278;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:1px;}
+.prio-item.prio-plan .prio-num{background:#7068aa;}
+.prio-item.prio-ueber .prio-num{background:#9060a8;}
+.prio-item.prio-loss .prio-num{background:#c0b8c8;}
+.prio-tag{font-size:10px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#A53278;margin-bottom:3px;}
+.prio-item.prio-plan .prio-tag{color:#7068aa;}
+.prio-item.prio-ueber .prio-tag{color:#9060a8;}
+.prio-item.prio-loss .prio-tag{color:#c0b8c8;}
+.prio-topic{font-size:15px;font-weight:700;color:#505050;margin-bottom:2px;}
+.prio-hint{font-size:13px;color:#888;line-height:1.5;}
+
+.cta-box{background:#fff;border:1.5px solid #A53278;border-radius:8px;padding:1.5rem;margin-bottom:1rem;}
+.cta-box h4{font-family:'Playfair Display',serif;font-size:20px;color:#A53278;margin-bottom:8px;}
+.cta-box p{font-size:14px;color:#505050;line-height:1.75;margin-bottom:1.25rem;}
+a.cta-btn,a.cta-btn:link,a.cta-btn:visited,a.cta-btn:hover,a.cta-btn:active,a.cta-btn:focus{
+  display:block;width:100%;padding:16px;
+  background:#A53278;
+  color:#ffffff!important;
+  font-weight:700!important;
+  -webkit-text-fill-color:#ffffff!important;
+  border:none;border-radius:6px;
+  font-family:'Lato',sans-serif;font-size:16px;
+  cursor:pointer;text-decoration:none!important;
+  letter-spacing:0.03em;text-align:center;
+  min-height:54px;
+}
+a.cta-btn:active{opacity:0.88;}
+.bafa{font-size:12px;color:#aaa;margin-top:10px;line-height:1.6;text-align:center;}
+.reset-lnk{font-size:13px;color:#aaa;cursor:pointer;text-decoration:underline;display:block;text-align:center;margin-top:1rem;padding:8px;}
+
+/* RESPONSIVE BREAKPOINTS */
+@media(min-width:600px){
+  body{padding:2.5rem 1.5rem;}
+  .headline{font-size:28px;}
+  .matrix-desktop{display:block;}
+  .matrix-mobile{display:none;}
+  a.cta-btn{display:inline-block;width:auto;padding:14px 30px;}
+}
+@media(max-width:599px){
+  .chips-grid{grid-template-columns:1fr 1fr;}
+  .matrix-desktop{display:none;}
+  .matrix-mobile{display:block;}
+}
+@media(max-width:380px){
+  .chips-grid{grid-template-columns:1fr;}
+  .q-btns{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+<div class="hc">
+
+  <div style="margin-bottom:0.5rem;">
+    <div class="hc-brand-top">HARTMANN</div>
+    <div class="hc-brand-bot">CONSULTING</div>
+  </div>
+  <div class="hc-divider"></div>
+  <div class="hc-tagline">Klarheit schaffen · Entscheidungen treffen · Zukunft gestalten</div>
+
+  <!-- STEP 1 -->
+  <div class="step on" id="s1">
+    <div class="badge">Schritt 1 von 3</div>
+    <h2 class="headline">Wo liegt Ihr größter Hebel?</h2>
+    <p class="subtext">Wählen Sie bis zu 3 Themen — oder geben Sie eigene ein. Im nächsten Schritt ordnen Sie sie ein. Das dauert nur 2 Minuten.</p>
+    <div class="chips-grid">
+      <div class="chip" data-v="KI integrieren" onclick="tog(this)"><span class="chip-icon">🤖</span>KI integrieren</div>
+      <div class="chip" data-v="Verkauf erhöhen" onclick="tog(this)"><span class="chip-icon">📈</span>Verkauf erhöhen</div>
+      <div class="chip" data-v="Sichtbarer werden" onclick="tog(this)"><span class="chip-icon">👁</span>Sichtbarer werden</div>
+      <div class="chip" data-v="Prozesse optimieren" onclick="tog(this)"><span class="chip-icon">⚙️</span>Prozesse optimieren</div>
+      <div class="chip" data-v="Strategie klären" onclick="tog(this)"><span class="chip-icon">🧭</span>Strategie klären</div>
+      <div class="chip" data-v="Positionierung schärfen" onclick="tog(this)"><span class="chip-icon">🎯</span>Positionierung schärfen</div>
+      <div class="chip" data-v="Team entwickeln" onclick="tog(this)"><span class="chip-icon">👥</span>Team entwickeln</div>
+      <div class="chip" data-v="Digitalisierung" onclick="tog(this)"><span class="chip-icon">💻</span>Digitalisierung</div>
+    </div>
+    <div class="custom-row">
+      <input id="ci" type="text" placeholder="Eigenes Thema …" maxlength="40"/>
+      <button onclick="addC()">+ Hinzufügen</button>
+    </div>
+    <div class="badge badge-dark" style="margin-bottom:0.6rem;">Ihre Auswahl</div>
+    <div class="sel-area" id="sel"><span class="empty-hint">Noch keine Themen gewählt</span></div>
+    <button class="btn" id="p1" disabled onclick="toS2()">Weiter zur Matrix →</button>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step" id="s2">
+    <div class="badge">Schritt 2 von 3</div>
+    <h2 class="headline">Wo stehen Ihre Themen?</h2>
+    <p class="subtext">Ordnen Sie jedes Thema einem Feld zu — so wie Sie es gerade empfinden.</p>
+
+    <!-- MOBILE: Tippen -->
+    <div class="matrix-mobile">
+      <div class="assign-hint">
+        👆 Tippen Sie bei jedem Thema auf das passende Feld.
+      </div>
+      <div class="topic-cards" id="topic-cards-mobile"></div>
+    </div>
+
+    <!-- DESKTOP: Drag & Drop -->
+    <div class="matrix-desktop">
+      <div class="assign-hint" style="background:#f5f0f8;border:1.5px solid #c8a8d8;border-radius:4px;padding:12px 15px;margin-bottom:1rem;font-size:14px;color:#6a3080;font-weight:700;">
+        ☝️ Ziehen Sie jedes Thema aus dem Feld unten in das passende Quadranten-Feld.
+      </div>
+      <div class="inbox" id="inbox"><span class="inbox-lbl">Zum Einordnen:</span></div>
+      <div class="axis-top-row">
+        <div></div>
+        <div class="axis-top-left">↑ Wichtig</div>
+        <div class="axis-top-right">Wichtig ↑</div>
+      </div>
+      <div class="axis-dring-row">
+        <span>← Dringlicher</span><span>Weniger dringend →</span>
+      </div>
+      <div class="matrix-outer">
+        <div class="axis-vert-wrap">
+          <div class="axis-vert-label">↑ Wichtig</div>
+          <div class="axis-vert-label">Weniger wichtig ↓</div>
+        </div>
+        <div class="matrix-grid">
+          <div class="q q-tun" id="q-tun" ondragover="aD(event)" ondrop="dT(event,'tun')" ondragleave="lv(event)">
+            <div class="q-lbl">TUN</div><div class="q-sub">Wichtig &amp; dringend</div>
+          </div>
+          <div class="q q-plan" id="q-plan" ondragover="aD(event)" ondrop="dT(event,'plan')" ondragleave="lv(event)">
+            <div class="q-lbl">PLANEN</div><div class="q-sub">Wichtig, nicht dringend</div>
+          </div>
+          <div class="q q-ueber" id="q-ueber" ondragover="aD(event)" ondrop="dT(event,'ueber')" ondragleave="lv(event)">
+            <div class="q-lbl">ÜBERGEBEN</div><div class="q-sub">Dringend, weniger wichtig</div>
+          </div>
+          <div class="q q-loss" id="q-loss" ondragover="aD(event)" ondrop="dT(event,'loss')" ondragleave="lv(event)">
+            <div class="q-lbl">LOS LASSEN</div><div class="q-sub">Weder wichtig noch dringend</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="matrix-note" id="matrix-note">✓ Alle Themen müssen eingeordnet sein, um Ihr Ergebnis zu sehen.</p>
+    <button class="btn" id="p2" disabled onclick="toS3()">Mein Ergebnis anzeigen →</button>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step" id="s3">
+    <div class="result-hero">
+      <div class="result-label">Ihr persönliches Ergebnis</div>
+      <h3 id="rh"></h3>
+      <p id="rt"></p>
+    </div>
+    <div class="prio-list">
+      <div class="prio-list-title">Ihre Prioritäten auf einen Blick</div>
+      <div id="prio-items"></div>
+    </div>
+    <div class="cta-box">
+      <h4>15 Minuten, die sich lohnen.</h4>
+      <p id="cta-text"></p>
+      <a class="cta-btn" href="https://calendly.com/info-56117/30min" target="_blank" style="color:#ffffff!important;font-weight:700!important;-webkit-text-fill-color:#ffffff!important;">Jetzt Termin sichern →</a>
+      <p class="bafa">Kostenfrei &amp; unverbindlich · BAFA-förderfähige Folgeberatung</p>
+    </div>
+    <span class="reset-lnk" onclick="rst()">← Von vorne beginnen</span>
+  </div>
+
+
+  <!-- Zurück-Link -->
+  <div style="text-align:center;padding:1.5rem 0 0.5rem;border-top:1px solid #E0E0E0;margin-top:1rem;">
+    <a href="https://richtungs-check.consulting-hartmann.de/" 
+       style="font-family:'Lato',sans-serif;font-size:13px;color:#A8A8CC;text-decoration:none;letter-spacing:0.05em;">
+      ← Zurück zur Übersicht
+    </a>
+  </div>
+</div>
+<script>
+var sel=[],drag=null,qs={tun:[],plan:[],ueber:[],loss:[]};
+var mobileAssign={};
+
+var hints={'KI integrieren':{tun:'Jetzt konkret starten — KI spart Zeit und schafft Wettbewerbsvorsprung.',plan:'Strukturiert angehen — mit klarem Anwendungsfall und realistischem Fahrplan.',ueber:'An jemanden mit KI-Kompetenz delegieren oder externen Impuls holen.',loss:'Aktuell kein Hebel — Energie besser woanders investieren.'},'Verkauf erhöhen':{tun:'Ihr Vertrieb braucht jetzt Klarheit: Positionierung, Ansprache, nächster Schritt.',plan:'Vertriebsstrategie entwickeln — wer ist Ihr Wunschkunde und wie erreichen Sie ihn?',ueber:'Vertriebsaufgaben gezielt delegieren oder Unterstützung einbinden.',loss:'Kein akuter Handlungsbedarf — fokussieren Sie sich auf Wichtigeres.'},'Sichtbarer werden':{tun:'Jetzt Sichtbarkeit aufbauen — Positionierung schärfen, Botschaft klar formulieren.',plan:'Langfristige Strategie für Sichtbarkeit und Außendarstellung entwickeln.',ueber:'Marketingaufgaben delegieren oder Spezialist einbinden.',loss:'Aktuell kein Fokusthema — Energie auf Wesentlicheres lenken.'},'Prozesse optimieren':{tun:'Ineffiziente Prozesse kosten täglich Energie — jetzt den größten Engpass lösen.',plan:'Schritt für Schritt optimieren — mit klarer Priorisierung und realistischen Zielen.',ueber:'Prozessthemen an jemanden mit Umsetzungskompetenz abgeben.',loss:'Kein akuter Handlungsbedarf — Prozesse laufen ausreichend gut.'},'Strategie klären':{tun:'Ohne klare Richtung laufen alle Maßnahmen ins Leere — jetzt den Fokus setzen.',plan:'Strategische Klarheit schaffen — wohin soll das Unternehmen in 12 Monaten?',ueber:'Strategieentwicklung mit externer Begleitung strukturieren.',loss:'Strategie ist klar — Energie auf Umsetzung verwenden.'},'Positionierung schärfen':{tun:'Unklar wahrgenommen zu werden kostet Kunden — jetzt den Kern herausarbeiten.',plan:'Positionierung gezielt weiterentwickeln — Stärken sichtbar machen.',ueber:'Positionierungsarbeit mit externer Perspektive angehen.',loss:'Positionierung ist solide — kein akuter Handlungsbedarf.'},'Team entwickeln':{tun:'Ihr Team braucht jetzt Klarheit, Orientierung oder neue Impulse.',plan:'Teamentwicklung strukturiert angehen — Rollen, Verantwortung, Zusammenarbeit.',ueber:'Führungsaufgaben gezielt delegieren oder HR-Unterstützung einbinden.',loss:'Team läuft gut — Fokus auf andere Hebel.'},'Digitalisierung':{tun:'Digitalisierung ist kein Selbstzweck — jetzt den größten Engpass lösen.',plan:'Schritt für Schritt digitalisieren — mit klarer Priorität und realistischem Plan.',ueber:'Digitalisierungsprojekte an jemanden mit Umsetzungserfahrung abgeben.',loss:'Kein akuter Handlungsbedarf — Energie auf Wichtigeres lenken.'},'default':{tun:'Das ist Ihr wichtigstes und dringendstes Thema — handeln Sie jetzt.',plan:'Dieses Thema verdient einen strukturierten Plan und konsequente Umsetzung.',ueber:'Prüfen Sie, wer dieses Thema übernehmen oder begleiten kann.',loss:'Aktuell kein Fokusthema — Energie auf Wesentlicheres verwenden.'}};
+
+var heroTexts={tun:{'KI integrieren':'KI ist Ihr größter Hebel gerade — und wer jetzt konkret startet, gewinnt Vorsprung.','Verkauf erhöhen':'Ihr Vertrieb wartet auf Klarheit. Wer hier jetzt ansetzt, wächst — direkt und spürbar.','Sichtbarer werden':'Sichtbarkeit entscheidet darüber, wer Sie findet. Jetzt ist der richtige Moment.','Prozesse optimieren':'Ineffizienz kostet täglich Energie und Geld. Ein klarer Schritt jetzt verändert viel.','Strategie klären':'Ohne Richtung laufen alle Maßnahmen ins Leere. Klarheit schafft sofort Wirkung.','Positionierung schärfen':'Wer nicht klar positioniert ist, verliert Kunden — oft ohne es zu merken.','Team entwickeln':'Ihr Team ist Ihr wichtigster Hebel. Klarheit und Orientierung wirken sofort.','Digitalisierung':'Digitalisierung am richtigen Punkt ansetzen — der Unterschied zwischen Aufwand und Wirkung.','default':'Ihr Fokusthema ist klar — und genau hier liegt Ihr größter Hebel gerade.'},none:'Sie haben Ihre Themen eingeordnet — das zeigt, wo Energie gebunden ist und wo Sie wirklich ansetzen sollten.'};
+
+var ctaTexts={tun:'In 15 Minuten zeige ich Ihnen, wie Sie den ersten konkreten Schritt gehen — ohne Umwege, ohne Standardlösung.',plan:'In 15 Minuten schauen wir gemeinsam, wie Sie dieses Thema strukturiert angehen — mit dem richtigen Fahrplan.',ueber:'In 15 Minuten klären wir, wie Sie sich entlasten können — durch Klarheit darüber, was Sie wirklich brauchen.',loss:'In 15 Minuten zeige ich Ihnen, wo Ihr echter Hebel liegt — und worauf Sie Ihre Energie verwenden sollten.',none:'In 15 Minuten zeige ich Ihnen, wie Sie Ihre Energie gezielt einsetzen — für das, was jetzt wirklich zählt.'};
+
+var qLabels={tun:'Jetzt handeln',plan:'Strategisch planen',ueber:'Delegieren & entlasten',loss:'Loslassen & fokussieren'};
+var qClasses={tun:'',plan:'prio-plan',ueber:'prio-ueber',loss:'prio-loss'};
+var qOrder=['tun','plan','ueber','loss'];
+
+var qBtnDefs=[
+  {q:'tun',cls:'q-btn-tun',label:'TUN',sub:'Wichtig & dringend'},
+  {q:'plan',cls:'q-btn-plan',label:'PLANEN',sub:'Wichtig, nicht dringend'},
+  {q:'ueber',cls:'q-btn-ueber',label:'ÜBERGEBEN',sub:'Dringend, weniger wichtig'},
+  {q:'loss',cls:'q-btn-loss',label:'LOS LASSEN',sub:'Weder wichtig noch dringend'}
+];
+
+function tog(el){var v=el.dataset.v;if(el.classList.contains('on')){el.classList.remove('on');sel=sel.filter(function(s){return s!==v;});}else{if(sel.length>=3)return;el.classList.add('on');sel.push(v);}renderSel();}
+function addC(){var i=document.getElementById('ci'),v=i.value.trim();if(!v||sel.length>=3||sel.indexOf(v)>-1)return;sel.push(v);i.value='';renderSel();}
+document.getElementById('ci').addEventListener('keydown',function(e){if(e.key==='Enter')addC();});
+function renderSel(){var el=document.getElementById('sel');if(sel.length===0){el.innerHTML='<span class="empty-hint">Noch keine Themen gewählt</span>';}else{el.innerHTML=sel.map(function(s){return '<div class="sel-tag">'+s+'<button onclick="remSel(\''+s.replace(/'/g,"\\'")+'\')" aria-label="Entfernen">×</button></div>';}).join('');}document.getElementById('p1').disabled=sel.length<1;}
+function remSel(v){sel=sel.filter(function(s){return s!==v;});document.querySelectorAll('.chip').forEach(function(c){if(c.dataset.v===v)c.classList.remove('on');});renderSel();}
+
+function buildMobileCards(){
+  mobileAssign={};
+  var container=document.getElementById('topic-cards-mobile');
+  container.innerHTML='';
+  sel.forEach(function(topic){
+    mobileAssign[topic]=null;
+    var card=document.createElement('div');
+    card.className='topic-card';
+    card.id='card-'+btoa(unescape(encodeURIComponent(topic))).replace(/[^a-zA-Z0-9]/g,'');
+    var top=document.createElement('div');top.className='topic-card-top';
+    var name=document.createElement('div');name.className='topic-card-name';name.textContent=topic;
+    var assigned=document.createElement('div');assigned.className='topic-card-assigned none';assigned.id='assigned-'+card.id;assigned.textContent='Noch nicht eingeordnet';
+    top.appendChild(name);top.appendChild(assigned);
+    var btns=document.createElement('div');btns.className='q-btns';
+    qBtnDefs.forEach(function(def){
+      var b=document.createElement('button');
+      b.className='q-btn '+def.cls;
+      b.innerHTML='<span>'+def.label+'</span><span class="q-btn-sub">'+def.sub+'</span>';
+      b.setAttribute('data-topic',topic);
+      b.setAttribute('data-q',def.q);
+      b.onclick=function(){assignMobile(topic,def.q,card.id);};
+      btns.appendChild(b);
+    });
+    card.appendChild(top);card.appendChild(btns);
+    container.appendChild(card);
+  });
+}
+
+function assignMobile(topic,q,cardId){
+  mobileAssign[topic]=q;
+  var card=document.getElementById(cardId);
+  var assignedEl=document.getElementById('assigned-'+cardId);
+  assignedEl.textContent=qLabels[q];
+  assignedEl.className='topic-card-assigned';
+  card.querySelectorAll('.q-btn').forEach(function(b){b.classList.remove('sel');});
+  card.querySelectorAll('[data-q="'+q+'"]').forEach(function(b){b.classList.add('sel');});
+  card.style.borderColor='#A53278';
+  updMobileBtn();
+}
+
+function updMobileBtn(){
+  var allAssigned=sel.every(function(t){return mobileAssign[t]!==null;});
+  var btn=document.getElementById('p2');
+  btn.disabled=!allAssigned;
+  btn.style.opacity=allAssigned?'1':'0.3';
+}
+
+function toS2(){
+  document.getElementById('s1').classList.remove('on');
+  document.getElementById('s2').classList.add('on');
+  Object.keys(qs).forEach(function(k){qs[k]=[];});
+  var isMobile=window.innerWidth<600;
+  if(isMobile){
+    buildMobileCards();
+    updMobileBtn();
+  } else {
+    var inbox=document.getElementById('inbox');
+    inbox.innerHTML='<span class="inbox-lbl">Zum Einordnen:</span>';
+    sel.forEach(function(s){var c=document.createElement('div');c.className='drag-chip';c.textContent=s;c.draggable=true;c.dataset.t=s;c.addEventListener('dragstart',function(e){drag=s;e.dataTransfer.effectAllowed='move';});inbox.appendChild(c);});
+    updDesktopBtn();
+  }
+}
+
+function aD(e){e.preventDefault();e.currentTarget.classList.add('over');}
+function lv(e){e.currentTarget.classList.remove('over');}
+function dT(e,q){e.preventDefault();e.currentTarget.classList.remove('over');if(!drag)return;Object.keys(qs).forEach(function(k){qs[k]=qs[k].filter(function(t){return t!==drag;});});var old=document.querySelector('#inbox [data-t="'+drag+'"]');if(old)old.remove();document.querySelectorAll('.placed').forEach(function(c){if(c.dataset.t===drag)c.remove();});qs[q].push(drag);var chip=document.createElement('span');chip.className='placed';chip.textContent=drag;chip.draggable=true;chip.dataset.t=drag;(function(t){chip.addEventListener('dragstart',function(e){drag=t;e.dataTransfer.effectAllowed='move';});})(drag);e.currentTarget.appendChild(chip);drag=null;updDesktopBtn();}
+function updDesktopBtn(){var placed=Object.values(qs).reduce(function(a,b){return a+b.length;},0);var btn=document.getElementById('p2');btn.disabled=placed<sel.length;btn.style.opacity=placed<sel.length?'0.3':'1';}
+
+function getHint(topic,q){var h=hints[topic]||hints['default'];return h[q]||h['default']||'';}
+function getHeroText(topic){return(heroTexts.tun&&heroTexts.tun[topic])||heroTexts.tun['default'];}
+
+function toS3(){
+  var isMobile=window.innerWidth<600;
+  if(isMobile){
+    Object.keys(qs).forEach(function(k){qs[k]=[];});
+    sel.forEach(function(t){var q=mobileAssign[t];if(q)qs[q].push(t);});
+  }
+  document.getElementById('s2').classList.remove('on');
+  document.getElementById('s3').classList.add('on');
+  var tun=qs.tun;
+  var focusTopic=tun.length>0?tun[0]:null;
+  var focusQ=focusTopic?'tun':null;
+  if(!focusTopic){var allQ=qOrder.filter(function(k){return qs[k].length>0;});if(allQ.length>0){focusQ=allQ[0];focusTopic=qs[allQ[0]][0];}}
+  var h=document.getElementById('rh');
+  var t=document.getElementById('rt');
+  h.style.cssText='color:#ffffff!important;font-family:Playfair Display,serif;font-size:22px;font-weight:700;margin-bottom:0.6rem;line-height:1.25;z-index:1;position:relative;';
+  t.style.cssText='color:rgba(255,255,255,0.92)!important;font-size:14px;line-height:1.75;z-index:1;position:relative;';
+  if(focusTopic){h.textContent='\u201e'+focusTopic+'\u201c \u2014 das ist Ihr Fokusthema.';t.textContent=getHeroText(focusTopic);}
+  else{h.textContent='Ihr Bild ist klar.';t.textContent=heroTexts.none;}
+  var prio=document.getElementById('prio-items');prio.innerHTML='';var n=1;
+  qOrder.forEach(function(q){qs[q].forEach(function(topic){var d=document.createElement('div');d.className='prio-item '+(qClasses[q]||'');var numDiv=document.createElement('div');numDiv.className='prio-num';numDiv.textContent=n++;var con=document.createElement('div');con.className='prio-content';var tag=document.createElement('div');tag.className='prio-tag';tag.textContent=qLabels[q];var tp=document.createElement('div');tp.className='prio-topic';tp.textContent=topic;var hi=document.createElement('div');hi.className='prio-hint';hi.textContent=getHint(topic,q);con.appendChild(tag);con.appendChild(tp);con.appendChild(hi);d.appendChild(numDiv);d.appendChild(con);prio.appendChild(d);});});
+  var ctaQ=focusQ||'none';
+  document.getElementById('cta-text').textContent=ctaTexts[ctaQ]||ctaTexts['none'];
+  var btn=document.querySelector('.cta-btn');
+  if(btn){btn.style.cssText='display:block;width:100%;padding:16px;background:#A53278;color:#ffffff!important;font-weight:700!important;-webkit-text-fill-color:#ffffff!important;border:none;border-radius:6px;font-family:Lato,sans-serif;font-size:16px;cursor:pointer;text-decoration:none!important;text-align:center;';}
+}
+
+function rst(){sel=[];mobileAssign={};Object.keys(qs).forEach(function(k){qs[k]=[];});document.querySelectorAll('.chip').forEach(function(c){c.classList.remove('on');});document.getElementById('s3').classList.remove('on');document.getElementById('s2').classList.remove('on');document.getElementById('s1').classList.add('on');renderSel();}
+</script>
+</body>
+</html>
